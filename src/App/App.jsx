@@ -6,10 +6,9 @@ import { selectAuthentificated } from '../redux/authReducer';
 // import { logoutUserThunk, refreshUserThunk } from './redux/operations';
 import { Loader } from 'components/Loader/Loader';
 import { StyledNavLink } from './App.styled';
-import Flowers from 'pages/Flowers/Flowers';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
-const ContactsPage = lazy(() => import('../pages/Flowers/Flowers'));
+const Flowers = lazy(() => import('../pages/Flowers/Flowers'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 
