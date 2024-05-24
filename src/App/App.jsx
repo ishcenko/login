@@ -1,31 +1,31 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-
-import { useSelector } from 'react-redux';
-import { selectAuthentificated } from '../redux/authReducer';
-// import { logoutUserThunk, refreshUserThunk } from './redux/operations';
 import { Loader } from 'components/Loader/Loader';
-import { StyledNavLink } from './App.styled';
 
-const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
-const Flowers = lazy(() => import('../pages/Flowers/Flowers'));
-const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
-const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+import { StyledNavLink } from './App.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAuthentificated, selectToken } from '../redux/authReducer';
+import { logoutUserThunk, refreshUserThunk } from '../redux/operations';
+
+const HomePage = lazy(() => import('pages/HomePage/HomePage'));
+const Flowers = lazy(() => import('pages/Flowers/Flowers'));
+const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
+const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 
 export const App = () => {
-  // const dispatch = useDispatch();
-  // const token = useSelector(selectToken);
+  const dispatch = useDispatch();
+  const token = useSelector(selectToken);
   const authentificated = useSelector(selectAuthentificated);
 
-  // useEffect(() => {
-  //   if (!token) return;
+  useEffect(() => {
+    if (!token) return;
 
-  //   dispatch(refreshUserThunk());
-  // }, [token, dispatch]);
+    dispatch(refreshUserThunk());
+  }, [token, dispatch]);
 
-  // const handleLogOut = () => {
-  //   dispatch(logoutUserThunk());
-  // };
+  const handleLogOut = () => {
+    dispatch(logoutUserThunk());
+  };
 
   return (
     <div>
@@ -34,8 +34,8 @@ export const App = () => {
           <StyledNavLink to="/">Home</StyledNavLink>
           {authentificated ? (
             <>
-              <StyledNavLink to="/flower">Flower</StyledNavLink>
-              {/* <button onClick={handleLogOut}>Log Out</button> */}
+              <StyledNavLink to="/flowers">Flowers</StyledNavLink>
+              <button onClick={handleLogOut}>Log Out</button>
             </>
           ) : (
             <>
@@ -49,7 +49,7 @@ export const App = () => {
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/flower" element={<Flowers />} />
+            <Route path="/flowers" element={<Flowers />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
           </Routes>

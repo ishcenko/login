@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { registerUserThunk } from '../../redux/operations';
-// import { registerUserThunk } from '../../redux/authReducer';
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -11,9 +10,9 @@ const RegisterPage = () => {
 
     const form = event.currentTarget;
 
-    const name = form.elements.userName.value;
-    const email = form.elements.userEmail.value;
-    const password = form.elements.userPassword.value;
+    const name = form.elements.userName.value.trim();
+    const email = form.elements.userEmail.value.trim();
+    const password = form.elements.userPassword.value.trim();
 
     dispatch(
       registerUserThunk({
