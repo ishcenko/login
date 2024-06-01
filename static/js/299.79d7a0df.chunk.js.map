@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/299.79d7a0df.chunk.js","mappings":"+HAMA,UAJgB,WACd,OAAOA,EAAAA,EAAAA,KAAA,OAAAC,SAAK,WACd,C","sources":["pages/Flowers/Flowers.jsx"],"sourcesContent":["import React from 'react';\n\nconst Flowers = () => {\n  return <div>Flowers</div>;\n};\n\nexport default Flowers;\n"],"names":["_jsx","children"],"sourceRoot":""}
