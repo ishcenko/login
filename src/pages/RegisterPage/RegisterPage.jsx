@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUserThunk } from '../../redux/operations';
 import { selectAuthentificated } from '../../redux/authReducer';
@@ -7,6 +7,7 @@ import { Navigate } from 'react-router-dom';
 const RegisterPage = () => {
   const dispatch = useDispatch();
   const authenticated = useSelector(selectAuthentificated);
+  const formRef = useRef(null);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -23,7 +24,11 @@ const RegisterPage = () => {
         email,
         password,
       })
-    );
+    ).then(() => {
+      if (!authenticated) {
+        formRef.current.reset();
+      }
+    });
   };
 
   if (authenticated) return <Navigate to="/flowers" />;

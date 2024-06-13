@@ -6,6 +6,8 @@ import { StyledNavLink } from './App.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthentificated, selectToken } from '../redux/authReducer';
 import { logoutUserThunk, refreshUserThunk } from '../redux/operations';
+import NotFound from 'pages/NorFound/NotFound';
+import { ButtonLogOut } from './App.styled';
 
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 const Flowers = lazy(() => import('pages/Flowers/Flowers'));
@@ -35,12 +37,13 @@ export const App = () => {
           {authentificated ? (
             <>
               <StyledNavLink to="/flowers">Flowers</StyledNavLink>
-              <button onClick={handleLogOut}>Log Out</button>
+              <ButtonLogOut onClick={handleLogOut}>Log Out</ButtonLogOut>
             </>
           ) : (
             <>
               <StyledNavLink to="/login">Login</StyledNavLink>
               <StyledNavLink to="/register">Register</StyledNavLink>
+              <StyledNavLink to="/404">404</StyledNavLink>
             </>
           )}
         </nav>
@@ -52,6 +55,7 @@ export const App = () => {
             <Route path="/flowers" element={<Flowers />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="404" element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>
